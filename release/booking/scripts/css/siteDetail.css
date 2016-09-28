@@ -40,7 +40,12 @@ table .title
     text-align: right;
     height: 60px;
 }
-
+table .title1
+{
+    background-color:rgb(245, 245, 245);
+    text-align: center;
+    height: 40px;
+}
 table .content
 { 
     width:200px;

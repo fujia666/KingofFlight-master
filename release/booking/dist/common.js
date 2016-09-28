@@ -131,7 +131,7 @@ var miniPanel = (function () {
         parentelement.appendChild(this.mini_control);
         mini.parse();
         var aPanel = mini.get(panelid);
-        aPanel.set({ "width": "auto", "height": "800px", "iconCls": iconCls, "expanded": expanded, "onbuttonclick": "onbuttonclick" });
+        aPanel.set({ "width": "auto", "height": "800", "iconCls": iconCls, "expanded": expanded, "onbuttonclick": "onbuttonclick" });
         aPanel.load(url, function () {
             var iFrame = aPanel.getIFrameEl();
             fnload(iFrame);

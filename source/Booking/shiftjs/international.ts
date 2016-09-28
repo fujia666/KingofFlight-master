@@ -1,63 +1,10 @@
 var KingofAttendances = KingofAttendances || {};
 KingofAttendances.international=new function() {
     this.setData=function(data,adbs,aappConfig){
+        var me=this;
+        var list;
         var o = data;
-        var si=`<tr height="40px" align="center">
-                  <td width="15%" class="title">员工号</td>
-                  <td width="15%">`+o[0].C3_526655169418+`</td>
-                  <td width="15%" class="title">姓名</td>
-                  <td width="15%">`+o[0].C3_526655177113+`</td>
-                  <td width="15%" class="title">身份证号</td><td width="25%">`+o[0].C3_526655197108+`</td>
-                </tr>
-                <tr height="40px" align="center">
-                  <td class="title">护照号</td>
-                  <td>`+o[0].C3_526655213359+`</td>
-                  <td class="title">护照有效期</td>
-                  <td>`+o[0].C3_527948550902+`</td>
-                  <td colspan="2"></td>
-                </tr>`
-        $("#si").html(si);
-        for(var i=0;i<o.length;i++){
-            var list=`<tr height="30px">
-                        <td class="head" width="10%" colspan="2">出差单据号</td>
-                        <td colspan="4">`+o[i].C3_526655624603+`</td>
-                        <td class="head1" align="center" width="10%">单据状态</td>
-                        <td align="center" width="15%">`+o[i].C3_527946742678+`</td>
-                        <td rowspan="5" width="5%" align="center" id="td_`+i+`">
-                            <a class="mini-button" id="a_`+i+`" style="width:80px;height:30px;" iconCls="icon-upload" onclick="KingofAttendances.international.submitClick(`+o[i].REC_ID+`)">提交</a>
-                            <a class="mini-button" style="width:80px;height:30px;" iconCls="icon-edit" onclick="KingofAttendances.international.editClick(`+o[i].REC_ID+`)">编辑</a>
-                            <a class="mini-button" style="width:80px;height:30px;" iconCls="icon-remove" onclick="KingofAttendances.international.revokeClick(`+o[i].REC_ID+`)">撤销</a>
-                        </td>
-                      </tr>
-                      <tr class="tc">
-                        <td width="10%" class="title" rowspan="2">出发日期</td>
-                        <td width="10%" rowspan="2">`+o[i].C3_527948208338+`</td>
-                        <td width="10%" class="title" rowspan="2">出发地</td>
-                        <td width="10%" rowspan="2">`+o[i].C3_526655262089+`</td>
-                        <td rowspan="3" width="15%"><img src="`+o[i].C3_527873192635+`" style="max-width:80px;max-height:80px;"/></td>
-                        <td rowspan="3" width="15%"><img src="`+o[i].C3_526655353950+`" style="max-width:80px;max-height:80px;"/></td>
-                        <td align="center">往程航班号</td>
-                        <td>`+o[i].C3_526655793514+`</td>
-                      </tr>
-                      <tr class="tc">
-                        <td>航班时间</td>
-                        <td>`+o[i].C3_526655809049+`</td>
-                      </tr>
-                      <tr class="tc">
-                        <td class="title" rowspan="2">返回日期</td>
-                        <td rowspan="2">`+o[i].C3_527948869929+`</td>
-                        <td class="title" rowspan="2">返回地</td>
-                        <td rowspan="2">`+o[i].C3_526655271756+`</td>
-                        <td align="center"">返程航班号</td>
-                        <td>`+o[i].C3_528311923010+`</td>
-                      </tr>
-                      <tr class="tc">
-                        <td>护照扫描件</td>
-                        <td>签证扫描件</td>
-                        <td>航班时间</td>
-                        <td>`+o[i].C3_526655466969+`</td>
-                      </tr>`;
-            $("#tbManage tbody").append(list);
+        this.jState=function(o,i){//判断单据状态改变按钮
             if(o[i].C3_527946742678=="已提交"){
                 $("#a_"+i).text("已提交").attr('onclick','');
             }else if(o[i].C3_527946742678=="待确认出票"){
@@ -68,7 +15,48 @@ KingofAttendances.international=new function() {
                 $("#td_"+i).empty();
             }
         };
-        this.addClick=function(){
+        this.bill=function(o,i){//动态加载单据信息
+            list=`<tr height="30px">
+                      <td class="head" width="10%" colspan="2">出差单据号</td>
+                      <td colspan="4">`+o[i].C3_526655624603+`</td>
+                      <td class="head1" align="center" width="10%">单据状态</td>
+                      <td align="center" width="15%">`+o[i].C3_527946742678+`</td>
+                      <td rowspan="5" width="5%" align="center" id="td_`+i+`">
+                          <a class="mini-button" id="a_`+i+`" style="width:80px;height:30px;" iconCls="icon-upload" onclick="KingofAttendances.international.submitClick(`+o[i].REC_ID+`)">提交</a>
+                          <a class="mini-button" style="width:80px;height:30px;" iconCls="icon-edit" onclick="KingofAttendances.international.editClick(`+o[i].REC_ID+`)">编辑</a>
+                          <a class="mini-button" style="width:80px;height:30px;" iconCls="icon-remove" onclick="KingofAttendances.international.revokeClick(`+o[i].REC_ID+`)">撤销</a>
+                      </td>
+                  </tr>
+                  <tr class="tc">
+                      <td width="10%" class="title" rowspan="2">出发日期</td>
+                      <td width="10%" rowspan="2">`+o[i].C3_527948208338+`</td>
+                      <td width="10%" class="title" rowspan="2">出发地</td>
+                      <td width="10%" rowspan="2">`+o[i].C3_526655262089+`</td>
+                      <td rowspan="3" width="15%"><img src="`+o[i].C3_527873192635+`" style="max-width:80px;max-height:80px;"/></td>
+                      <td rowspan="3" width="15%"><img src="`+o[i].C3_526655353950+`" style="max-width:80px;max-height:80px;"/></td>
+                      <td align="center">往程航班号</td>
+                      <td>`+o[i].C3_526655793514+`</td>
+                  </tr>
+                  <tr class="tc">
+                      <td>航班时间</td>
+                      <td>`+o[i].C3_526655809049+`</td>
+                      </tr>
+                      <tr class="tc">
+                      <td class="title" rowspan="2">返回日期</td>
+                      <td rowspan="2">`+o[i].C3_527948869929+`</td>
+                      <td class="title" rowspan="2">返回地</td>
+                      <td rowspan="2">`+o[i].C3_526655271756+`</td>
+                      <td align="center"">返程航班号</td>
+                      <td>`+o[i].C3_528311923010+`</td>
+                  </tr>
+                  <tr class="tc">
+                      <td>护照扫描件</td>
+                      <td>签证扫描件</td>
+                      <td>航班时间</td>
+                      <td>`+o[i].C3_528311922738+`</td>
+                  </tr>`;
+        }
+        this.addClick=function(){//新增航班单据
           var win = mini.open({
                 url: '../dist/component/setdata.html',
                 showModal: false,
@@ -83,7 +71,7 @@ KingofAttendances.international=new function() {
                 }
             });
         };
-        this.editClick=function(REC_ID){
+        this.editClick=function(REC_ID){//编辑航班单据
           var win = mini.open({
                 
                 url: '../dist/component/editdata.html',
@@ -99,7 +87,7 @@ KingofAttendances.international=new function() {
                 }
             });
         };             
-        this.revokeClick=function(REC_ID){
+        this.revokeClick=function(REC_ID){//撤销单据
             if(confirm('您确定要撤销么？')){
     		    mini.parse();
                 var form = new mini.Form("form1");
@@ -126,7 +114,7 @@ KingofAttendances.international=new function() {
     			return;
     		}
         };
-        this.submitClick=function(REC_ID){
+        this.submitClick=function(REC_ID){//提交单据
             if(confirm('您确定要提交么？')){
     		    mini.parse();
                 var form = new mini.Form("form1");
@@ -154,7 +142,7 @@ KingofAttendances.international=new function() {
     			return;
     		}
         };
-        this.conClick=function(REC_ID){
+        this.conClick=function(REC_ID){//确认单据
             if(confirm('您是否要确认么？')){
     		    mini.parse();
                 var form = new mini.Form("form1");
@@ -183,66 +171,13 @@ KingofAttendances.international=new function() {
     			return;
     		}
         };
-        var list2=`<div class="mature-progress-box v0" id="mamture">
-        					<dl onclick="KingofAttendances.international.numClick(0,'未提交')">
-        						<dt><a>未提交</a></dt>
-        					</dl>
-        					<dl onclick="KingofAttendances.international.numClick(200,'已提交')">
-        						<dt><a>已提交</a></dt>
-        					</dl>
-        					<dl onclick="KingofAttendances.international.numClick(400,'待确认出票')">
-        						<dt><a>待申请人确认</a></dt>
-        					</dl>
-        					<dl onclick="KingofAttendances.international.numClick(600,'待行政确认出票')">
-        						<dt><a>待行政确认</a></dt>
-        					</dl>
-        					<dl onclick="KingofAttendances.international.numClick(800,'订单完成')">
-        						<dt><a>订单完成</p></dt>
-        					</dl>
-        					<div class="progress-box">
-        						<i class="progress-box-1"></i>
-        						<i class="progress-box-2"></i>
-        						<i class="progress-box-3"></i>
-        						<i class="progress-box-4"></i>
-        					</div>
-        				</div>
-        				<div class="mature-progress-box bgtwos">
-        				  <dl><dt></dt></dl><dl><dt></dt></dl><dl><dt></dt></dl><dl><dt></dt></dl><dl><dt></dt></dl>
-        				</div>`;
-        $(".mature-progress").html(list2);
-        this.numClick=function(_number,state){
+        this.navClick=function(_number,state){//导航
             $("#tbManage tbody").empty()
             for(var i=0;i<o.length;i++){
                 if(o[i].C3_527946742678==state){
-                   var list=`<tr height="30px">
-                        <td class="head" width="10%">出差单据号</td>
-                        <td colspan="5">`+o[i].C3_526655624603+`</td>
-                        <td class="head1" align="center" width="10%">单据状态</td>
-                        <td align="center" width="15%">`+o[i].C3_527946742678+`</td>
-                        <td rowspan="3" width="5%" align="center" id="td_`+i+`">
-                            <a class="mini-button" id="a_`+i+`" style="width:80px;height:30px;" iconCls="icon-upload" onclick="KingofAttendances.international.submitClick(`+o[i].REC_ID+`)">提交</a>
-                            <a class="mini-button" style="width:80px;height:30px;" iconCls="icon-edit" onclick="KingofAttendances.international.editClick(`+o[i].REC_ID+`)">编辑</a>
-                            <a class="mini-button" style="width:80px;height:30px;" iconCls="icon-remove" onclick="KingofAttendances.international.revokeClick(`+o[i].REC_ID+`)">撤销</a>
-                        </td>
-                      </tr>
-                      <tr align="center">
-                        <td width="10%" class="title">出发日期</td>
-                        <td width="10%">`+o[i].C3_527948208338+`</td>
-                        <td width="10%" class="title">出发地</td>
-                        <td width="10%">`+o[i].C3_526655262089+`</td>
-                        <td rowspan="2" width="15%"><img src="`+o[i].C3_527873192635+`" style="max-width:80px;max-height:80px;"/><p>护照扫描件</p></td>
-                        <td rowspan="2" width="15%"><img src="`+o[i].C3_526655353950+`" style="max-width:80px;max-height:80px;"/><p>签证扫描件</p></td>
-                        <td align="center">往程航班号</td>
-                        <td placeholder="待行政填写">`+o[i].C3_526655793514+`<br>航班时间:`+o[i].C3_526655809049+`</td>
-                      </tr>
-                      <tr align="center">
-                        <td class="title">返回日期</td>
-                        <td>`+o[i].C3_527948869929+`</td>
-                        <td class="title">返回地</td>
-                        <td>`+o[i].C3_526655271756+`</td>
-                        <td align="center" colspan="2">返程航班号:`+o[i].C3_526655466969+`<br>航班时间:`+o[i].C3_526655466969+`</td>
-                      </tr>`;
-                      $("#tbManage tbody").append(list);
+                    me.bill(o,i);
+                    $("#tbManage tbody").append(list);
+                    me.jState(o,i);
                 }
             };
         	$(".mature-progress").html(list2);
@@ -322,6 +257,53 @@ KingofAttendances.international=new function() {
         			})
         		},1)
         	}
+        };
+        var list2=`<div class="mature-progress-box v0" id="mamture">
+        			    <dl onclick="KingofAttendances.international.navClick(0,'未提交')">
+        					<dt><a>未提交</a></dt>
+        				</dl>
+        				<dl onclick="KingofAttendances.international.navClick(200,'已提交')">
+        					<dt><a>已提交</a></dt>
+        				</dl>
+        				<dl onclick="KingofAttendances.international.navClick(400,'待确认出票')">
+        					<dt><a>待申请人确认</a></dt>
+        				</dl>
+        				<dl onclick="KingofAttendances.international.navClick(600,'待行政确认出票')">
+        					<dt><a>待行政确认</a></dt>
+        				</dl>
+        				<dl onclick="KingofAttendances.international.navClick(800,'订单完成')">
+        					<dt><a>订单完成</p></dt>
+        				</dl>
+        				<div class="progress-box">
+        					<i class="progress-box-1"></i>
+        					<i class="progress-box-2"></i>
+        					<i class="progress-box-3"></i>
+        					<i class="progress-box-4"></i>
+        				</div>
+        			</div>
+        			<div class="mature-progress-box bgtwos">
+                        <dl><dt></dt></dl><dl><dt></dt></dl><dl><dt></dt></dl><dl><dt></dt></dl><dl><dt></dt></dl>
+        			</div>`;
+        $(".mature-progress").html(list2);
+        var si=`<tr height="40px" align="center">
+                  <td width="15%" class="title1">员工号</td>
+                  <td width="15%">`+o[0].C3_526655169418+`</td>
+                  <td width="15%" class="title1">姓名</td>
+                  <td width="15%">`+o[0].C3_526655177113+`</td>
+                  <td width="15%" class="title1">身份证号</td><td width="25%">`+o[0].C3_526655197108+`</td>
+                </tr>
+                <tr height="40px" align="center">
+                  <td class="title1">护照号</td>
+                  <td>`+o[0].C3_526655213359+`</td>
+                  <td class="title1">护照有效期</td>
+                  <td>`+o[0].C3_527948550902+`</td>
+                  <td colspan="2"></td>
+                </tr>`
+        $("#si").html(si);
+        for(var i=0;i<o.length;i++){
+            this.bill(o,i);
+            $("#tbManage tbody").append(list);
+            this.jState(o,i);
         };
     }
 }

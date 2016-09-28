@@ -12,7 +12,7 @@ KingofAttendances.international=new function() {
             }else if(o[i].C3_527946742678=="待行政确认出票"){
                 $("#a_"+i).text("已确认").attr('onclick','');
             } if(o[i].C3_527946742678=="订单完成"){
-                $("#td_"+i).empty();
+                $("#td_"+i).remove();
             }
         };
         this.bill=function(o,i){//动态加载单据信息
@@ -32,8 +32,10 @@ KingofAttendances.international=new function() {
                       <td width="10%" rowspan="2">`+o[i].C3_527948208338+`</td>
                       <td width="10%" class="title" rowspan="2">出发地</td>
                       <td width="10%" rowspan="2">`+o[i].C3_526655262089+`</td>
-                      <td rowspan="3" width="15%"><img src="`+o[i].C3_527873192635+`" style="max-width:80px;max-height:80px;"/></td>
-                      <td rowspan="3" width="15%"><img src="`+o[i].C3_526655353950+`" style="max-width:80px;max-height:80px;"/></td>
+                      <td rowspan="3" width="15%"><img src="`+o[i].C3_527873192635+`" width="60px" style="max-width:80px;max-height:80px;"/></td>
+                      <td rowspan="3" width="15%"><img src="`+o[i].C3_526655353950+`" width="60px" style="max-width:80px;max-height:80px;"/></td>
+                      <!--<td rowspan="3" width="30px"><img src="`+o[i].C3_527873192635+`" width="60px"/></td>-->
+                      <!--<td rowspan="3" width="30px"><img src="`+o[i].C3_526655353950+`" width="60px"/></td>-->
                       <td align="center">往程航班号</td>
                       <td>`+o[i].C3_526655793514+`</td>
                   </tr>
@@ -55,6 +57,7 @@ KingofAttendances.international=new function() {
                       <td>航班时间</td>
                       <td>`+o[i].C3_528400600428+`</td>
                   </tr>`;
+            // list='<tr height="30px"><td class="head" width="10%" colspan="2">出差单据号</td><td colspan="4">'+o[i].C3_526655624603+'</td><td class="head1" align="center" width="10%">单据状态</td><td align="center" width="15%">'+o[i].C3_527946742678+'</td><td rowspan="5" width="5%" align="center" id="td_'+i+'"><a class="mini-button" id="a_'+i+'" style="width:80px;height:30px;" iconCls="icon-upload" onclick="KingofAttendances.international.submitClick('+o[i].REC_ID+')">提交</a><a class="mini-button" style="width:80px;height:30px;" iconCls="icon-edit" onclick="KingofAttendances.international.editClick('+o[i].REC_ID+')">编辑</a><a class="mini-button" style="width:80px;height:30px;" iconCls="icon-remove" onclick="KingofAttendances.international.revokeClick('+o[i].REC_ID+')">撤销</a></td></tr><tr class="tc"><td width="10%" class="title" rowspan="2">出发日期</td><td width="10%" rowspan="2">'+o[i].C3_527948208338+'</td><td width="10%" class="title" rowspan="2">出发地</td><td width="10%" rowspan="2">'+o[i].C3_526655262089+'</td><td rowspan="3" width="15%"><img src="'+o[i].C3_527873192635+'" style="max-width:80px;max-height:80px;"/></td><td rowspan="3" width="15%"><img src="'+o[i].C3_526655353950+'" style="max-width:80px;max-height:80px;"/></td><td align="center">往程航班号</td><td>'+o[i].C3_526655793514+'</td></tr><tr class="tc"><td>航班时间</td><td>'+o[i].C3_528400651698+'</td></tr><tr class="tc"><td class="title" rowspan="2">返回日期</td><td rowspan="2">'+o[i].C3_527948869929+'</td><td class="title" rowspan="2">返回地</td><td rowspan="2">'+o[i].C3_526655271756+'</td><td align="center"">返程航班号</td><td>'+o[i].C3_528311923010+'</td></tr><tr class="tc"><td>护照扫描件</td><td>签证扫描件</td><td>航班时间</td><td>'+o[i].C3_528400600428+'</td></tr>'
         }
         this.addClick=function(){//新增航班单据
           var win = mini.open({

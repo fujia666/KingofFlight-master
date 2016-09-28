@@ -39,7 +39,7 @@ KingofAttendances.international=new function() {
                   </tr>
                   <tr class="tc">
                       <td>航班时间</td>
-                      <td>`+o[i].C3_526655809049+`</td>
+                      <td>`+o[i].C3_528400651698+`</td>
                       </tr>
                       <tr class="tc">
                       <td class="title" rowspan="2">返回日期</td>
@@ -53,7 +53,7 @@ KingofAttendances.international=new function() {
                       <td>护照扫描件</td>
                       <td>签证扫描件</td>
                       <td>航班时间</td>
-                      <td>`+o[i].C3_528311922738+`</td>
+                      <td>`+o[i].C3_528400600428+`</td>
                   </tr>`;
         }
         this.addClick=function(){//新增航班单据

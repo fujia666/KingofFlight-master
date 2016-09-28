@@ -3,41 +3,34 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var baseObjectM = (function () {
-    function baseObjectM() {
+var baseObjectM1 = (function () {
+    function baseObjectM1() {
     }
-    return baseObjectM;
+    return baseObjectM1;
 }());
-var LineSupervisor = (function (_super) {
-    __extends(LineSupervisor, _super);
-    function LineSupervisor() {
+var Manage1 = (function (_super) {
+    __extends(Manage1, _super);
+    function Manage1() {
         _super.apply(this, arguments);
     }
-    return LineSupervisor;
-}(baseObjectM));
-var Manage = (function (_super) {
-    __extends(Manage, _super);
-    function Manage() {
-        _super.apply(this, arguments);
-    }
-    return Manage;
-}(baseObjectM));
-var Shiftrptofmanage = (function (_super) {
-    __extends(Shiftrptofmanage, _super);
-    function Shiftrptofmanage(element) {
+    return Manage1;
+}(baseObjectM1));
+var internationalfilght = (function (_super) {
+    __extends(internationalfilght, _super);
+    function internationalfilght(element) {
         _super.call(this, element);
     }
-    Shiftrptofmanage.prototype.appendManage = function (parentelement, data, subdata, mini, dbs) {
-        var aManage = new Manage();
+    internationalfilght.prototype.appendManage = function (parentelement, data, subdata, mini, dbs) {
+        var aManage = new Manage1();
         var panelid = "manager";
         var className = "mini-panel mini-panel-primary";
         aManage = data[0];
-        var title = "机票预定信息";
-        _super.prototype.appendPanel.call(this, parentelement, panelid, mini, className, title, appConfig.shifrpttofmanager.mainHtml, function (iFrame) {
-            iFrame.contentWindow.KingofAttendances.ShiftManage.setData(data, dbs, appConfig);
+        var title = "国际机票预定信息";
+        _super.prototype.appendPanel.call(this, parentelement, panelid, mini, className, title, appConfig.internationalfilght.mainHtml, function (iFrame) {
+            iFrame.contentWindow.KingofAttendances.international.setData(data, dbs, appConfig);
         }, true, "");
     };
-    return Shiftrptofmanage;
+    return internationalfilght;
 }(miniPanel));
 function main() {
     $.getJSON("./dist/app.config.json", function (data, textStatus, hr) {
@@ -55,8 +48,8 @@ function submain() {
     var dbs = new dbHelper(baseUrl, user, ucode);
     var el = document.getElementById('content');
     var datagrids = document.getElementById('datagrids');
-    var shiftPanel = new Shiftrptofmanage(el);
-    var resid = appConfig.booking.guojiResid;
+    var shiftPanel = new internationalfilght(el);
+    var resid = appConfig.internationalfilght.guojiResid;
     var cmswhere = "";
     if (appConfig.app.debug)
         shiftPanel.start();

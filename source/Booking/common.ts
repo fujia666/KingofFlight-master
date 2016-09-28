@@ -107,6 +107,7 @@ appfunctions.uploadFile=new function (){
                 data: {data:json,resid:resid},
                 cache: false,
                 success: function (text) {
+                   
                     if (text.error=="0"){
                         if (fnSuccess!=null){
                             fnSuccess(text);
@@ -117,7 +118,10 @@ appfunctions.uploadFile=new function (){
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    if (fnSyserror!=null){fnSyserror(jqXHR, textStatus, errorThrown);}
+                    
+                    if (fnSyserror!=null){
+                        
+                        fnSyserror(jqXHR, textStatus, errorThrown);}
                 }
         });
    }

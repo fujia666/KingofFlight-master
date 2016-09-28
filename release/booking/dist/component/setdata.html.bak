@@ -4,7 +4,7 @@
             <table>
                 <tr>
                     <td>护照号: </td>
-                    <td><input class="mini-textbox" required="true" name="C3_526655213359"></td>
+                    <td><input class="mini-textbox" required="true" name="C3_526655213359" style="text-align:left;"></td>
                 </tr>
                 <tr>
                     <td>护照有效期</td>
@@ -111,8 +111,6 @@
                     o._id=1;
                     o._state="added";
                     var json = mini.encode([o]);
-                    //debugger;
-                    console.log(json);
                     dbs.dbSavedata(appConfig.internationalfilght.guojiResid,0,json,dataSaved,fnerror,fnhttperror);
                     function dataSaved(text){
                         alert("申请成功");
@@ -131,7 +129,7 @@
         </script>
         <script src="../../scripts/boot.js" type="text/javascript"></script>
         <link href="../../scripts/css/siteDetail.css" rel="stylesheet" type="text/css">
-        <script src="../shiftJs/international.js" type="text/javascript"></script>
+        <script src="../shiftJs/shiftofmanage.js" type="text/javascript"></script>
         <script src="../component/swfupload/swfupload.js" type="text/javascript"></script>
     </body>
 </html>

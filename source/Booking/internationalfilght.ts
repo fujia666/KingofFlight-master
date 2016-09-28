@@ -5,34 +5,31 @@ declare var getMethod;
 
 declare var saveMethod;
 
-class baseObjectM{
+class baseObjectM1{
     REC_ID:string;
 }
-class LineSupervisor extends baseObjectM{
+class Manage1 extends baseObjectM1{
 
 }
-class Manage extends baseObjectM{
-
-}
-class Shiftrptofmanage extends miniPanel {
-  
+class internationalfilght extends miniPanel {
+      
     constructor(element: HTMLElement) {
         super(element);
     }
 
     appendManage(parentelement: HTMLElement,data :any,subdata:any,mini:any,dbs:any)
     {
-       var aManage=new Manage();
+       var aManage=new Manage1();
        var panelid="manager";
        var className="mini-panel mini-panel-primary";
      
        aManage=data[0];
  
-       var title="机票预定信息";
+       var title="国际机票预定信息";
 
-        super.appendPanel(parentelement,panelid,mini,className,title,appConfig.shifrpttofmanager.mainHtml,
+        super.appendPanel(parentelement,panelid,mini,className,title,appConfig.internationalfilght.mainHtml,
            function(iFrame){
-                iFrame.contentWindow.KingofAttendances.ShiftManage.setData(data,dbs,appConfig);
+                iFrame.contentWindow.KingofAttendances.international.setData(data,dbs,appConfig);
             },true,"");
     }
 }
@@ -54,10 +51,10 @@ function submain() {
     var dbs=new dbHelper(baseUrl,user,ucode);
     var el = document.getElementById('content');
     var datagrids = document.getElementById('datagrids');
-    var shiftPanel = new Shiftrptofmanage(el);
+    var shiftPanel = new internationalfilght(el);
   
-   
-    var resid=appConfig.booking.guojiResid;
+    
+    var resid=appConfig.internationalfilght.guojiResid;
     //var subresid=appConfig.shifrpttofmanager.subresid;
     var cmswhere="";
     if (appConfig.app.debug)
